@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="A website with conclusions you can click to">
+	<meta name="author" content="">
+
+	<title>ClickToConclusions.com - A website with conclusions you can click to</title>
+
+	<link href="//netdna.bootstrapcdn.com/bootswatch/3.1.1/cerulean/bootstrap.min.css" rel="stylesheet">
+
+	<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+	<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	<![endif]-->
+
+	<style>
+		@media(min-width: 768px){.container{max-width:730px}}
+		h1{margin:0}
+		h2{margin:24px 0}
+		body .jumbotron{margin-top:14px;padding-top:14px;padding-bottom:14px}
+		textarea{min-width:100%}
+		blockquote p{font-style:italic;}
+		blockquote{display:none}
+		#feedback{margin-top:48px}
+	</style>
+</head>
+
+<body>
+
+<div class="container">
+
+	<div class="jumbotron text-center">
+		<h1>Click to Conclusions</h1>
+		<p>A website with conclusions you can click to.</p>
+	</div>
+
+	<form id="main">
+		<label for="statement">Make a statement:</label>
+		<textarea rows="6" id="statement" name="statement"></textarea>
+		<div class="text-center">
+			<input type="submit" class="btn btn-lg btn-success" onclick="javascript:conclusions();return false;" value="Click for a Conclusion">
+		</div>
+	</form>
+
+	<div id="results" class="text-center alert alert-success" style="display:none;">
+		<p class="lead">Conclusion:</p>
+		<h2 id="message"></h2>
+		<a href="#" onclick="javascript:reset();return false;">Try another?</a>
+	</div>
+
+	<div id="feedback">
+		<h3>What People are Saying:</h3>
+		<blockquote id="quote-0">
+			<p>...The worst idea I've ever heard in my life...</p>
+			<cite>Michael Bolton</cite>
+		</blockquote>
+		<blockquote id="quote-1">
+			<p>Yes, this [website] is horrible...</p>
+			<cite>Samir Nagheenanajar</cite>
+		</blockquote>
+	</div>
+
+	<footer class="text-center">
+		Developed by: <a href="http://davekz.com/" target="_blank">Tom Smykowski</a><br>
+		<a href="https://github.com/davidkryzaniak/clicktoconclusions.github.io" target="_blank">Fork it</a>
+	</footer>
+
+
+</div>
+
+<script>
+	var possibleConclusions = [
+		"MOOT!",
+		"Accept it.",
+		"Go wild.",
+		"You better watch your cornhole.",
+		"That's worth a million dollars.",
+		"That's better than the pet rock!",
+		"That's not marketable enough."
+	];
+
+	var statement = document.getElementById("statement");
+	var main = document.getElementById("main");
+	var results = document.getElementById("results");
+	var message = document.getElementById("message");
+
+
+	document.getElementById("quote-"+Math.round(Math.random())).style.display = 'block';
+
+	function conclusions(){
+		if(statement.value == ''){
+			alert('You haven\'t entered a statement');
+		}else{
+			main.style.display = 'none';
+			results.style.display = 'block';
+			//ensures you get the same result each time
+			message.innerHTML = possibleConclusions[(statement.value.length % possibleConclusions.length)];
+		}
+		return false;
+	}
+
+	function reset(){
+		main.style.display = 'block';
+		results.style.display = 'none';
+		return false;
+	}
+</script>
+
+<!-- Ann was here... and she's cheating on you. -->
+
+</body>
+</html>
